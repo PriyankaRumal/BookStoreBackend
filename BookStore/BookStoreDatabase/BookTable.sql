@@ -10,3 +10,5 @@ create table BookTable(
    Rating_Count bigint
 )
 select *from BookTable
+
+alter table BookTable add Book_Image varchar(max);
