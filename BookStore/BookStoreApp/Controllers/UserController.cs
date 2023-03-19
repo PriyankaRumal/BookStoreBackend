@@ -118,5 +118,30 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [Authorize(Roles = Role.Admin)]
+        [HttpDelete]
+        [Route("DeleteUser")]
+
+        public IActionResult DeleteUser(long userId)
+        {
+            try
+            {
+                var result = userBl.DeleteUser(userId);
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, message = "deleted Successfull!", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = false, message = " Unsuccessfull!" });
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

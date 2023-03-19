@@ -215,7 +215,37 @@ namespace RepositoryLayer.Service
                     }
                 }
             }
+
            
+        }
+        public bool DeleteUser(long userId)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                using (sqlConnection)
+                {
+                    SqlCommand sqlCommand = new SqlCommand("spdelete", sqlConnection);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@UserId", userId);
+                    sqlConnection.Open();
+                    var result = sqlCommand.ExecuteNonQuery();
+                    if (result >= 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

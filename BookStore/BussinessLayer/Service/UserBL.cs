@@ -15,6 +15,19 @@ namespace BussinessLayer.Service
             this.userRl = userRl;
         }
 
+        public bool DeleteUser(long userId)
+        {
+            try
+            {
+                return userRl.DeleteUser(userId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public string ForgetPassword(string Email_Id)
         {
 
