@@ -54,6 +54,32 @@ namespace BussinessLayer.Service
             }
         }
 
+        public IEnumerable<CartModel1> GetCartDetailsbyId(long UserId, long CartId)
+        {
+            try
+            {
+                return cartRL.GetCartDetailsbyId(UserId, CartId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        //public IEnumerable<GetCartModel> RemoveFromCart(long UserId)
+        //{
+        //    try
+        //    {
+        //        return cartRL.RemoveFromCart(UserId);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+
         public bool UpdateCart(long CartId, long Book_Count, long UserId)
         {
             try

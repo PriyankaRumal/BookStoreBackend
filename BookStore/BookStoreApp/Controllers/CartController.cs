@@ -68,6 +68,32 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+
+        [Authorize]
+        [HttpGet]
+        [Route("RetriveFromCartById")]
+        public IActionResult GetCartDetailsbyId( long CartId)
+        {
+            try
+            {
+                int UserId = Convert.ToInt32(User.Claims.FirstOrDefault(g => g.Type == "UserId").Value);
+                var result = cartBL.GetCartDetailsbyId(UserId, CartId);
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, message = "retrived Successfull!", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { success = false, message = "failed!" });
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
         [Authorize]
         [HttpPut]
         [Route("UpdateCart")]
@@ -117,6 +143,31 @@ namespace BookStoreApp.Controllers
                 throw ex;
             }
         }
+
+        //[Authorize]
+        //[HttpGet]
+        //[Route("Retrivecart")]
+        //public IActionResult RemoveFromCart()
+        //{
+        //    try
+        //    {
+        //        int UserId = Convert.ToInt32(User.Claims.FirstOrDefault(g => g.Type == "UserId").Value);
+        //        var result = cartBL.GetCartDetails(UserId);
+        //        if (result != null)
+        //        {
+        //            return this.Ok(new { success = true, message = "retrived Successfull!", data = result });
+        //        }
+        //        else
+        //        {
+        //            return this.BadRequest(new { success = false, message = "failed!" });
+        //        }
+        //    }
+        //    catch (System.Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
 
     }
 }
