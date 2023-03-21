@@ -8,3 +8,4 @@ BookQuantity bigint,
 OrderDate Date
 );
 select *from OrderTable
+Drop Table OrderTable

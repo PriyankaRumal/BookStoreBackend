@@ -52,6 +52,9 @@ namespace BookStoreApp
             services.AddTransient<IFeedbackRL, FeedbackRL>();
             services.AddTransient<IFeedbackBL, FeedbackBL>();
 
+            services.AddTransient<IAddressRL, AddressRL>();
+            services.AddTransient<IAddressBL, AddressBL>();
+
 
 
 
