@@ -246,6 +246,13 @@ namespace RepositoryLayer.Service
 
                 throw;
             }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
         }
     }
 }
