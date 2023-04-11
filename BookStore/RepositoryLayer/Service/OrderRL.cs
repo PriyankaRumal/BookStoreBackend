@@ -133,5 +133,50 @@ namespace RepositoryLayer.Service
                 sqlConnection.Close();
             }
         }
+
+        public IEnumerable<GetAllOrder> GetAllOrderSec(long UserId)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                sqlConnection.Open();
+                List<GetAllOrder> OrderList = new List<GetAllOrder>();
+                SqlCommand cmd = new SqlCommand("spGetAllOrderSec", sqlConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UserId ", UserId);
+                SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    OrderList.Add(new GetAllOrder()
+                    {
+                        OrderId = Convert.ToInt32(sqlDataReader["OrderId"]),
+                        BookId = Convert.ToInt32(sqlDataReader["BookId"]),
+                        UserId = Convert.ToInt32(sqlDataReader["UserId"]),
+                        AddressId = Convert.ToInt32(sqlDataReader["AddressId"]),
+                        TotalPrice = Convert.ToInt32(sqlDataReader["TotalPrice"]),
+                        BookQuantity = Convert.ToInt32(sqlDataReader["BookQuantity"]),
+                        OrderDate = sqlDataReader["OrderDate"].ToString(),
+                        Book_Image = sqlDataReader["Book_Image"].ToString(),
+                        Author_Name = sqlDataReader["Author_Name"].ToString(),
+                        Price = Convert.ToInt32(sqlDataReader["Price"]),
+                        Discount_Price = Convert.ToInt32(sqlDataReader["Discount_Price"]),
+                        Book_Name = sqlDataReader["Book_Name"].ToString(),
+
+                    });
+                }
+                return OrderList;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
     }
 }

@@ -26,7 +26,7 @@ namespace BookStoreApp.Controllers
             try
             {
                 long UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
-                var result = wishListBL.AddToWishList(BookId, UserId);
+                var result = wishListBL.AddToWishList( UserId, BookId);
                 if (result != null)
                 {
                     return Ok(new { success = true, message = "Add Book successful", data = result });

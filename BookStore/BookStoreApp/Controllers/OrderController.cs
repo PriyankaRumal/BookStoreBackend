@@ -100,5 +100,32 @@ namespace BookStoreApp.Controllers
                 throw;
             }
         }
+
+        [HttpGet]
+        [Route("GetAllOrdersec")]
+        public IActionResult GetAllOrderSec()
+        {
+            try
+            {
+                long UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserId").Value);
+
+                var response = orderBL.GetAllOrderSec(UserId);
+
+                if (response != null)
+                {
+                    return Ok(new { success = true, message = "retrived successfully", data = response });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Failed!" });
+                }
+
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

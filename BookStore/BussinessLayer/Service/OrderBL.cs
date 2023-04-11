@@ -54,5 +54,19 @@ namespace BussinessLayer.Service
                 throw;
             }
         }
+
+        public IEnumerable<GetAllOrder> GetAllOrderSec(long UserId)
+        {
+            try
+            {
+                return orderRL.GetAllOrderSec(UserId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }
